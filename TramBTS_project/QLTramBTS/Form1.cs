@@ -372,6 +372,10 @@ namespace QLTramBTS
             }
 
             comboBox1.Items.Clear();
+            ComboboxItem item1 = new ComboboxItem();
+            item1.Text = "All";
+            item1.Value = "All";
+            comboBox1.Items.Add(item1);
             for (int i = 1; i <= count_day_limit; i++)
             {
                 ComboboxItem item = new ComboboxItem();
