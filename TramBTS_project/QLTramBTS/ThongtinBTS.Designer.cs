@@ -94,7 +94,7 @@
             this.cmbHang.Items.AddRange(new object[] {
             "Viettel",
             "Vinaphone",
-            "Mobiphone"});
+            "Mobifone"});
             this.cmbHang.Location = new System.Drawing.Point(83, 70);
             this.cmbHang.Name = "cmbHang";
             this.cmbHang.Size = new System.Drawing.Size(279, 21);
