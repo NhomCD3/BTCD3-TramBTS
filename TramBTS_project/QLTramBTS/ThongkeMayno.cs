@@ -32,7 +32,7 @@ namespace QLTramBTS
         //Cap nhat item cho combobox
         void UpdateItem()
         {
-            cmbHang.Items.Clear();
+            
             cmbTram.Items.Clear();
 
             //Them item cho combobox ngay
@@ -403,16 +403,19 @@ namespace QLTramBTS
                 if (!cmbNgay.Text.Equals("") && !cmbThang.Text.Equals("") && !cmbNam.Text.Equals("") && rdbNgay.Checked)
                 {
                     string ngay = cmbNgay.Text + "/" + cmbThang.Text + "/" + cmbNam.Text;
-                    DateTime date=DateTime.Today;
+                    DateTime date; //=DateTime.Today;
                     try
                     {
-                        date = Convert.ToDateTime(ngay);
+
+                        //date = Convert.ToDateTime(ngay, "dd/MM/yyyy");
+                        date = new DateTime(Int32.Parse(cmbNam.Text), Int32.Parse(cmbThang.Text), Int32.Parse(cmbNgay.Text));
+                        UpdatelistNgay(date);
                     }
                     catch(Exception ex)
                     {
                         MessageBox.Show("Lỗi định dạng ngày","ERROR");
                     }
-                    UpdatelistNgay(date);
+                    
                 }
                 else
                     if (!cmbThang.Text.Equals("") && !cmbNam.Text.Equals("")&&rdbThang.Checked)
@@ -710,45 +713,12 @@ namespace QLTramBTS
             if (System.Text.RegularExpressions.Regex.IsMatch(txtSolanvipham.Text, "[^0-9]"))
             {
                 MessageBox.Show("Chỉ cho phép nhập số.");
-                txtSolanvipham.Text.Remove(txtSolanvipham.Text.Length - 1);
+                txtSolanvipham.Text = txtSolanvipham.Text.Remove(txtSolanvipham.Text.Length - 1);
+                txtSolanvipham.Select(txtSolanvipham.Text.Length, 0);
             }
         }
 
-        private void cmbNgay_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void cmbThang_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void cmbNam_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void cmbQuy_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void cmbHang_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void cmbTram_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private void cmbTim_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
+       
         private void cmbThang_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!cmbThang.Text.Equals("") && !cmbNam.Text.Equals("") && rdbThang.Checked)
@@ -778,6 +748,7 @@ namespace QLTramBTS
                 btnThongke.Enabled = true;
                 
             }
+            else
             {
                 if (!cmbNgay.Text.Equals("") && !cmbThang.Text.Equals("") && !cmbNam.Text.Equals("") && rdbNgay.Checked)
                 {

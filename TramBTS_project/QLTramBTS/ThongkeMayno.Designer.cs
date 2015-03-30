@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnThongkeAll = new System.Windows.Forms.Button();
@@ -72,19 +71,6 @@
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(325, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(313, 23);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "QUẢN LÝ THỜI GIAN CHẠY MÁY NỔ";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label1.UseWaitCursor = true;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label2);
@@ -116,7 +102,7 @@
             this.groupBox1.Controls.Add(this.lblThang);
             this.groupBox1.Controls.Add(this.cmbNgay);
             this.groupBox1.Controls.Add(this.lblNgay);
-            this.groupBox1.Location = new System.Drawing.Point(12, 60);
+            this.groupBox1.Location = new System.Drawing.Point(12, 38);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(886, 146);
             this.groupBox1.TabIndex = 15;
@@ -134,7 +120,7 @@
             // 
             // btnThongkeAll
             // 
-            this.btnThongkeAll.Location = new System.Drawing.Point(145, 108);
+            this.btnThongkeAll.Location = new System.Drawing.Point(183, 107);
             this.btnThongkeAll.Name = "btnThongkeAll";
             this.btnThongkeAll.Size = new System.Drawing.Size(97, 23);
             this.btnThongkeAll.TabIndex = 46;
@@ -164,7 +150,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(248, 108);
+            this.btnUpdate.Location = new System.Drawing.Point(286, 107);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 26;
@@ -180,7 +166,7 @@
             this.rdbQuy.Size = new System.Drawing.Size(44, 17);
             this.rdbQuy.TabIndex = 52;
             this.rdbQuy.TabStop = true;
-            this.rdbQuy.Text = "Qúy";
+            this.rdbQuy.Text = "Quý";
             this.rdbQuy.UseVisualStyleBackColor = true;
             this.rdbQuy.CheckedChanged += new System.EventHandler(this.rdbQuy_CheckedChanged);
             // 
@@ -217,6 +203,7 @@
             // 
             // cmbTim
             // 
+            this.cmbTim.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTim.FormattingEnabled = true;
             this.cmbTim.Items.AddRange(new object[] {
             "Tên trạm",
@@ -229,7 +216,6 @@
             this.cmbTim.Size = new System.Drawing.Size(121, 21);
             this.cmbTim.TabIndex = 42;
             this.cmbTim.SelectedIndexChanged += new System.EventHandler(this.cmbTim_SelectedIndexChanged);
-            this.cmbTim.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbTim_KeyPress);
             // 
             // rdbVipham
             // 
@@ -265,13 +251,13 @@
             // 
             // cmbTram
             // 
+            this.cmbTram.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTram.FormattingEnabled = true;
             this.cmbTram.Location = new System.Drawing.Point(629, 64);
             this.cmbTram.Name = "cmbTram";
             this.cmbTram.Size = new System.Drawing.Size(93, 21);
             this.cmbTram.TabIndex = 41;
             this.cmbTram.SelectedIndexChanged += new System.EventHandler(this.cmbTram_SelectedIndexChanged);
-            this.cmbTram.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbTram_KeyPress);
             // 
             // rdbNam
             // 
@@ -308,7 +294,7 @@
             // 
             // btnThongke
             // 
-            this.btnThongke.Location = new System.Drawing.Point(9, 108);
+            this.btnThongke.Location = new System.Drawing.Point(47, 107);
             this.btnThongke.Name = "btnThongke";
             this.btnThongke.Size = new System.Drawing.Size(130, 23);
             this.btnThongke.TabIndex = 39;
@@ -327,6 +313,7 @@
             // 
             // cmbHang
             // 
+            this.cmbHang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHang.FormattingEnabled = true;
             this.cmbHang.Items.AddRange(new object[] {
             "Mobifone",
@@ -337,7 +324,6 @@
             this.cmbHang.Size = new System.Drawing.Size(93, 21);
             this.cmbHang.TabIndex = 35;
             this.cmbHang.SelectedIndexChanged += new System.EventHandler(this.cmbHang_SelectedIndexChanged);
-            this.cmbHang.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbHang_KeyPress);
             // 
             // lblHang
             // 
@@ -350,6 +336,7 @@
             // 
             // cmbQuy
             // 
+            this.cmbQuy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbQuy.FormattingEnabled = true;
             this.cmbQuy.Items.AddRange(new object[] {
             "1",
@@ -361,7 +348,6 @@
             this.cmbQuy.Size = new System.Drawing.Size(63, 21);
             this.cmbQuy.TabIndex = 33;
             this.cmbQuy.SelectedIndexChanged += new System.EventHandler(this.cmbQuy_SelectedIndexChanged);
-            this.cmbQuy.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbQuy_KeyPress);
             // 
             // lblQuy
             // 
@@ -374,13 +360,13 @@
             // 
             // cmbNam
             // 
+            this.cmbNam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbNam.FormattingEnabled = true;
             this.cmbNam.Location = new System.Drawing.Point(277, 64);
             this.cmbNam.Name = "cmbNam";
             this.cmbNam.Size = new System.Drawing.Size(62, 21);
             this.cmbNam.TabIndex = 31;
             this.cmbNam.SelectedIndexChanged += new System.EventHandler(this.cmbNam_SelectedIndexChanged);
-            this.cmbNam.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbNam_KeyPress);
             // 
             // lblNam
             // 
@@ -393,13 +379,13 @@
             // 
             // cmbThang
             // 
+            this.cmbThang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbThang.FormattingEnabled = true;
             this.cmbThang.Location = new System.Drawing.Point(167, 64);
             this.cmbThang.Name = "cmbThang";
             this.cmbThang.Size = new System.Drawing.Size(64, 21);
             this.cmbThang.TabIndex = 29;
             this.cmbThang.SelectedIndexChanged += new System.EventHandler(this.cmbThang_SelectedIndexChanged);
-            this.cmbThang.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbThang_KeyPress);
             // 
             // lblThang
             // 
@@ -412,13 +398,13 @@
             // 
             // cmbNgay
             // 
+            this.cmbNgay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbNgay.FormattingEnabled = true;
             this.cmbNgay.Location = new System.Drawing.Point(47, 64);
             this.cmbNgay.Name = "cmbNgay";
             this.cmbNgay.Size = new System.Drawing.Size(67, 21);
             this.cmbNgay.TabIndex = 27;
             this.cmbNgay.SelectedIndexChanged += new System.EventHandler(this.cmbNgay_SelectedIndexChanged);
-            this.cmbNgay.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbNgay_KeyPress);
             // 
             // lblNgay
             // 
@@ -432,9 +418,9 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.listView1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 212);
+            this.groupBox2.Location = new System.Drawing.Point(12, 199);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(886, 215);
+            this.groupBox2.Size = new System.Drawing.Size(886, 228);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Danh sách";
@@ -505,7 +491,6 @@
             this.ClientSize = new System.Drawing.Size(910, 437);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
             this.Name = "ThongkeMayno";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "Quản lý thời gian chạy máy nổ";
@@ -513,13 +498,11 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView listView1;

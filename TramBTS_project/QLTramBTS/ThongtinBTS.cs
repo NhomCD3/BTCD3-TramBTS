@@ -17,11 +17,11 @@ namespace QLTramBTS
         public ThongtinBTS()
         {
             InitializeComponent();
+            btnSua.Enabled = btnXoa.Enabled = false;
             tramContext = new TramContext();
             tramRepo = new GenericRepository<Tram>(tramContext);// chứa insert, update,delete.
             this.cmbNam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            btnSearch.Enabled = false;
-            btnXoa.Enabled = false;
+            btnSearch.Enabled = false;            
             UpdateList();
         }
         void UpdateList()
@@ -116,6 +116,8 @@ namespace QLTramBTS
             txtMa.Enabled = true;
             txtQuangDuong.Enabled = true;
             txtTen.Enabled = true;
+            btnThem.Enabled = true;
+            btnSua.Enabled = btnXoa.Enabled = false;
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -203,7 +205,19 @@ namespace QLTramBTS
         {
             ListView.SelectedListViewItemCollection SelectedList;
             SelectedList = listView.SelectedItems;
-            btnXoa.Enabled = true;
+            if(SelectedList.Count==0)
+            {
+                btnReset_Click(null, null);
+                
+
+            }
+            else
+            {
+                btnSua.Enabled = btnXoa.Enabled = true;
+                btnThem.Enabled = false;
+
+            }
+            
             foreach (ListViewItem item in SelectedList)
             {
                 string ten = item.SubItems[0].Text;
@@ -231,24 +245,30 @@ namespace QLTramBTS
             {
                 MessageBox.Show("Please enter only numbers.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtGiaThue.Text = txtGiaThue.Text.Remove(txtGiaThue.Text.Length - 1);
+                txtGiaThue.Select(txtGiaThue.Text.Length, 0);
             }
         }
 
         private void txtQuangDuong_TextChanged(object sender, EventArgs e)
         {
-            try
+            if (txtQuangDuong.Text.Length != 0)
             {
-                float x = Single.Parse(txtQuangDuong.Text);
-                if (x < 0)
+                try
                 {
-                    MessageBox.Show("Nhập số không âm", "Error");
-                    txtQuangDuong.Text = txtQuangDuong.Text.Remove(0);
+                    float x = Single.Parse(txtQuangDuong.Text);
+                    if (x < 0)
+                    {
+                        MessageBox.Show("Nhập số không âm", "Error");
+                        txtQuangDuong.Text = txtQuangDuong.Text.Remove(0);
+                        txtQuangDuong.Select(txtQuangDuong.Text.Length, 0);
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString(), "Error");
-                txtQuangDuong.Text = txtQuangDuong.Text.Remove(txtQuangDuong.Text.Length - 1);
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString(), "Error");
+                    txtQuangDuong.Text = txtQuangDuong.Text.Remove(txtQuangDuong.Text.Length - 1);
+                    txtQuangDuong.Select(txtQuangDuong.Text.Length, 0);
+                }
             }
         }
 
@@ -259,6 +279,7 @@ namespace QLTramBTS
             {
                 MessageBox.Show("Mã không được chứa kí tự đặc biệt!", "Error");
                 txtMa.Text = txtMa.Text.Remove(txtMa.Text.Length - 1);
+                txtMa.Select(txtMa.Text.Length, 0);
             }
         }
 

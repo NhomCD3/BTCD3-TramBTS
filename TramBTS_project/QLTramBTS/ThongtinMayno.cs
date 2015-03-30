@@ -116,6 +116,7 @@ namespace QLTramBTS
         {
             ListView.SelectedListViewItemCollection selectedList;
             selectedList = listView.SelectedItems;
+
             List<string> tramId = new List<string>();
             foreach (ListViewItem item in selectedList)
             {
@@ -143,7 +144,7 @@ namespace QLTramBTS
             dtpNgayGioChayMayNo.ResetText();
             txtSoGioChay.Text = "";
             txtSoLanViPham.Text = "0";
-            cbTramId.ResetText();
+            cbTramId.Text = "";
             btnThem.Enabled = true;
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
@@ -197,47 +198,56 @@ namespace QLTramBTS
         private void dtpNgayGioChayMayNo_ValueChanged(object sender, EventArgs e)
         {
             System.TimeSpan diff = dtpNgayGioChayMayNo.Value - dtpNgayGioMatDien.Value;
-            if (diff.TotalHours > 0)
+
+            if (diff.TotalSeconds > -1)
             {
-                txtSoLanViPham.Text = diff.TotalHours > 2 ? "1" : "0";
+                if ((dtpNgayGioMatDien.Value.Hour >= 21 && dtpNgayGioMatDien.Value.Hour <= 23)
+                || (dtpNgayGioMatDien.Value.Hour >= 0 && dtpNgayGioMatDien.Value.Hour < 5)
+                || (dtpNgayGioMatDien.Value.Hour == 5 && dtpNgayGioMatDien.Value.Minute == 0 && dtpNgayGioMatDien.Value.Second == 0))
+                {
+                    txtSoLanViPham.Text = ((dtpNgayGioChayMayNo.Value.Hour > 7
+                        || (dtpNgayGioChayMayNo.Value.Hour == 7 && (dtpNgayGioChayMayNo.Value.Minute != 0 || dtpNgayGioChayMayNo.Value.Second != 0)))
+                        && dtpNgayGioChayMayNo.Value.Date > dtpNgayGioMatDien.Value.Date) ? "1" : "0";
+                }
+                else
+                {
+                    txtSoLanViPham.Text = diff.TotalHours > 2 ? "1" : "0";
+                }
+            }
+            else
+            {
+                //MessageBox.Show("Giờ chạy máy nổ phải trễ hơn hoặc bằng giờ mất điện!", "Error");
+                //dtpNgayGioChayMayNo.Value = dtpNgayGioMatDien.Value;
+                txtSoLanViPham.Text = "0";
             }
         }
 
-        private void listView_Click(object sender, EventArgs e)
-        {
-            ListViewItem item = listView.SelectedItems[0];
-            txtMa.Text = item.SubItems[0].Text;
-            txtMa.Enabled = false;
-            dtpNgayGioMatDien.Value = DateTime.Parse(item.SubItems[1].Text);
-            dtpNgayGioChayMayNo.Value = DateTime.Parse(item.SubItems[2].Text);
-            txtSoGioChay.Text = item.SubItems[3].Text;
-            txtSoLanViPham.Text = item.SubItems[4].Text;
-            cbTramId.Text = item.SubItems[5].Text;
-            btnThem.Enabled = false;
-            btnSua.Enabled = true;
-            btnXoa.Enabled = true;
-        }
 
         private bool CheckDataOnScreen()
         {
             bool ok = true;
-            if (txtMa.Text.Length == 0)
+            if (txtMa.Text.Length == 0 || txtSoGioChay.Text.Length == 0 || cbTramId.Text.Length == 0)
             {
-                MessageBox.Show("Mã không được để trống!", "Error");
-                ok = false;
+                MessageBox.Show("Điền các trường còn trống!", "Error");
+                return false;
             }
-            else if (System.Text.RegularExpressions.Regex.IsMatch(txtMa.Text, @"[^a-zA-Z0-9]+$"))
+            //if (txtMa.Text.Length == 0)
+            //{
+            //    MessageBox.Show("Mã không được để trống!", "Error");
+            //    ok = false;
+            //}
+            if (System.Text.RegularExpressions.Regex.IsMatch(txtMa.Text, @"[^a-zA-Z0-9]+$"))
             {
                 MessageBox.Show("Mã không được chứa kí tự đặc biệt!", "Error");
                 ok = false;
             }
 
-            if (txtSoGioChay.Text.Length == 0)
-            {
-                MessageBox.Show("Số giờ chạy không được để trống!", "Error");
-                ok = false;
-            }
-            else
+            //if (txtSoGioChay.Text.Length == 0)
+            //{
+            //    MessageBox.Show("Số giờ chạy không được để trống!", "Error");
+            //    ok = false;
+            //}
+            //else
             {
                 try
                 {
@@ -255,21 +265,43 @@ namespace QLTramBTS
                 }
             }
 
-            if (cbTramId.Text.Length == 0)
-            {
-                MessageBox.Show("Mã trạm không được để trống!", "Error");
-                ok = false;
-            }
+            //if (cbTramId.Text.Length == 0)
+            //{
+            //    MessageBox.Show("Mã trạm không được để trống!", "Error");
+            //    ok = false;
+            //}
 
             System.TimeSpan diff = dtpNgayGioChayMayNo.Value - dtpNgayGioMatDien.Value;
-            
-            if (!(diff.TotalSeconds > -1))
+
+            if (diff.TotalSeconds <= -1)
             {
                 MessageBox.Show("Giờ chạy máy nổ phải trễ hơn hoặc bằng giờ mất điện!", "Error");
                 ok = false;
             }
 
             return ok;
+        }
+
+        private void listView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListView.SelectedListViewItemCollection selectedList;
+            selectedList = listView.SelectedItems;
+            if (selectedList.Count == 0)
+            {
+                btnReset_Click(null, null);
+                return;
+            }
+            ListViewItem item = listView.SelectedItems[0];
+            txtMa.Text = item.SubItems[0].Text;
+            txtMa.Enabled = false;
+            dtpNgayGioMatDien.Value = DateTime.Parse(item.SubItems[1].Text);
+            dtpNgayGioChayMayNo.Value = DateTime.Parse(item.SubItems[2].Text);
+            txtSoGioChay.Text = item.SubItems[3].Text;
+            txtSoLanViPham.Text = item.SubItems[4].Text;
+            cbTramId.Text = item.SubItems[5].Text;
+            btnThem.Enabled = false;
+            btnSua.Enabled = true;
+            btnXoa.Enabled = true;
         }
     }
 }
