@@ -10,16 +10,19 @@ namespace QLTramBTS
 {
     public class TramContext : DbContext
     {
+        static string path = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Database";
+        static string connectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + path + @"\TramBTS_DB.mdf;Integrated Security=True;";
+
         public TramContext()
-            : base()
-            //: base("name=TramDBConnectionString")
+            : base(connectionString)
+            //: base("name=offlineData")
         {
             //Database.SetInitializer<TramContext>(new CreateDatabaseIfNotExists<TramContext>());
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<TramContext, QLTramBTS.Migrations.Configuration>("TramDBConnectionString"));
             //Database.SetInitializer<TramContext>(new MigrateDatabaseToLatestVersion<TramContext, QLTramBTS.Migrations.Configuration>("TramBTS_DB1"));
 
-            var path = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Database";
-            Database.Connection.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + path + @"\TramBTS_DB.mdf;Integrated Security=True;";
+            //var path = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Database";
+            //Database.Connection.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + path + @"\TramBTS_DB.mdf;Integrated Security=True;";
         }
 
         public DbSet<Tram> Tram { get; set; }
