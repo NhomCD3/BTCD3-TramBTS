@@ -185,6 +185,21 @@ namespace QLTramBTS
             }
 
         }
+        private bool checkMonthAndQuarter(int month , int quarter)
+        {
+            switch (quarter)
+            {
+                case 1:
+                    if (month > 3) return false; break;
+                case 2:
+                    if (month < 4 || month > 6) return false; break;
+                case 3:
+                    if (month < 7 || month > 9) return false; break;
+                case 4:
+                    if (month < 10 ) return false; break;
+            }
+            return true;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -193,7 +208,7 @@ namespace QLTramBTS
                 MessageBox.Show("Nhập dữ liệu không đúng");
                 return;
             }
-
+            
             TramContext tramContext = new TramContext();
             string day = ((ComboboxItem)comboBox1.SelectedItem == null) ? "All" : ((ComboboxItem)comboBox1.SelectedItem).Value.ToString();
             string month = ((ComboboxItem)comboBox2.SelectedItem == null) ? "All" : ((ComboboxItem)comboBox2.SelectedItem).Value.ToString();
@@ -203,8 +218,19 @@ namespace QLTramBTS
             string tram = ((ComboboxItem)comboBox5.SelectedItem == null) ? "All" : ((ComboboxItem)comboBox5.SelectedItem).Value.ToString();
 
             int year_num = int.Parse(year);
-
-
+            if(day!="All" && month=="All")
+            {
+                MessageBox.Show("Phải chọn tháng chi tiết");
+                return;
+            }
+            if(month != "All" && quarter != "All")
+            {
+                if(!checkMonthAndQuarter(int.Parse(month),int.Parse(quarter)))
+                {
+                    MessageBox.Show("Phải chọn tháng thuộc quí");
+                    return;
+                }
+            }
             if (day == "All" && month == "All" && quarter != "All" && tram == "All")
             {
                 int quar_num = int.Parse(quarter);
@@ -275,6 +301,7 @@ namespace QLTramBTS
                 var L2EQuery = from st in tramContext.ChayMayNo
                                where st.NgayGioChayMayNo == dt
                                select st;
+                tinhGiaDauChayMayNo(L2EQuery);
             }
             else if (tram != "All")
             {
@@ -283,6 +310,7 @@ namespace QLTramBTS
                 var L2EQuery = from st in tramContext.ChayMayNo
                                where st.NgayGioChayMayNo == dt && st.TramId == tram
                                select st;
+                tinhGiaDauChayMayNo(L2EQuery);
             }
 
 
@@ -387,6 +415,7 @@ namespace QLTramBTS
         }
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+           /*
             if (!isInit) return;
             string month = ((ComboboxItem)comboBox2.SelectedItem).Value.ToString();
             if (month != "All")
@@ -416,6 +445,7 @@ namespace QLTramBTS
             {
                 setQuarterAgain(0, true);
             }
+            */
         }
 
         private void label9_Click(object sender, EventArgs e)
