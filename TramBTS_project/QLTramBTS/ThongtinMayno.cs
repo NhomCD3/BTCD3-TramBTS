@@ -200,18 +200,32 @@ namespace QLTramBTS
 
         private void dtpNgayGioChayMayNo_ValueChanged(object sender, EventArgs e)
         {
-            System.TimeSpan diff = dtpNgayGioChayMayNo.Value - dtpNgayGioMatDien.Value;
+            DateTime gioChay = dtpNgayGioChayMayNo.Value;
+            DateTime gioCup = dtpNgayGioMatDien.Value;
 
-            if (diff.TotalSeconds > -1)
+            System.TimeSpan diff = gioChay - gioCup;
+
+            if (diff.TotalSeconds > -1) // if gioChay > gioCup
             {
-                if ((dtpNgayGioMatDien.Value.Hour >= 21 && dtpNgayGioMatDien.Value.Hour <= 23)
-                || (dtpNgayGioMatDien.Value.Hour >= 0 && dtpNgayGioMatDien.Value.Hour < 5)
-                || (dtpNgayGioMatDien.Value.Hour == 5 && dtpNgayGioMatDien.Value.Minute == 0 && dtpNgayGioMatDien.Value.Second == 0))
+                if (gioCup.Hour >= 21 && gioCup.Hour <= 23)
                 {
-                    txtSoLanViPham.Text = ((dtpNgayGioChayMayNo.Value.Hour > 7
-                        || (dtpNgayGioChayMayNo.Value.Hour == 7 && (dtpNgayGioChayMayNo.Value.Minute != 0 || dtpNgayGioChayMayNo.Value.Second != 0)))
-                        && dtpNgayGioChayMayNo.Value.Date > dtpNgayGioMatDien.Value.Date) ? "1" : "0";
+                    DateTime moc = new DateTime(gioCup.Year, gioCup.Month, gioCup.Day + 1, 7, 0, 1);
+
+                    System.TimeSpan diff2 = gioChay - moc;
+
+                    txtSoLanViPham.Text = diff2.TotalSeconds > -1 ? "1" : "0";
                 }
+
+                else if ((gioCup.Hour >= 0 && gioCup.Hour < 5)
+                        || (gioCup.Hour == 5 && gioCup.Minute == 0 && gioCup.Second == 0))
+                {
+                    DateTime moc = new DateTime(gioCup.Year, gioCup.Month, gioCup.Day, 7, 0, 1);
+
+                    System.TimeSpan diff2 = gioChay - moc;
+
+                    txtSoLanViPham.Text = diff2.TotalSeconds > -1 ? "1" : "0";
+                }
+
                 else
                 {
                     txtSoLanViPham.Text = diff.TotalHours > 2 ? "1" : "0";
