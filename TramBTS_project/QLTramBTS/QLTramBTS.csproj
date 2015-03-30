@@ -61,15 +61,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201503280935086_init1.cs" />
-    <Compile Include="Migrations\201503280935086_init1.Designer.cs">
-      <DependentUpon>201503280935086_init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503281110562_init3.cs" />
-    <Compile Include="Migrations\201503281110562_init3.Designer.cs">
-      <DependentUpon>201503281110562_init3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Thongkechiphi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,12 +98,6 @@
     <Compile Include="TramContext.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503280935086_init1.resx">
-      <DependentUpon>201503280935086_init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503281110562_init3.resx">
-      <DependentUpon>201503281110562_init3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThongkeMayno.resx">
       <DependentUpon>ThongkeMayno.cs</DependentUpon>
