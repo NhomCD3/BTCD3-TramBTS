@@ -53,6 +53,10 @@
             this.Tram = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Tiendau = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Tienxangxe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tongchiphi = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.diachi = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.quangduong = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // giadau
@@ -80,27 +84,30 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(475, 15);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(475, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.Size = new System.Drawing.Size(58, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Giá dầu";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(636, 15);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(636, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(45, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "Hệ số";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(791, 15);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(791, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.Size = new System.Drawing.Size(64, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Giá xăng";
             // 
@@ -207,11 +214,11 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Teal;
-            this.label9.Location = new System.Drawing.Point(603, 146);
+            this.label9.Location = new System.Drawing.Point(618, 149);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(130, 16);
+            this.label9.Size = new System.Drawing.Size(164, 16);
             this.label9.TabIndex = 18;
-            this.label9.Text = "Tiền chạy máy nổ";
+            this.label9.Text = "Tổng tiền chạy máy nổ";
             this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label10
@@ -221,14 +228,14 @@
             this.label10.ForeColor = System.Drawing.Color.Teal;
             this.label10.Location = new System.Drawing.Point(646, 190);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(76, 16);
+            this.label10.Size = new System.Drawing.Size(110, 16);
             this.label10.TabIndex = 19;
-            this.label10.Text = "Tiền xăng";
+            this.label10.Text = "Tổng tiền xăng";
             // 
             // tienmayno
             // 
             this.tienmayno.Enabled = false;
-            this.tienmayno.Location = new System.Drawing.Point(749, 145);
+            this.tienmayno.Location = new System.Drawing.Point(788, 145);
             this.tienmayno.Name = "tienmayno";
             this.tienmayno.Size = new System.Drawing.Size(100, 20);
             this.tienmayno.TabIndex = 20;
@@ -237,7 +244,7 @@
             // tb_tienxang
             // 
             this.tb_tienxang.Enabled = false;
-            this.tb_tienxang.Location = new System.Drawing.Point(749, 187);
+            this.tb_tienxang.Location = new System.Drawing.Point(788, 186);
             this.tb_tienxang.Name = "tb_tienxang";
             this.tb_tienxang.Size = new System.Drawing.Size(100, 20);
             this.tb_tienxang.TabIndex = 21;
@@ -247,12 +254,15 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Tram,
             this.Tiendau,
-            this.Tienxangxe});
+            this.Tienxangxe,
+            this.tongchiphi,
+            this.diachi,
+            this.quangduong});
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(12, 135);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(481, 230);
+            this.listView1.Size = new System.Drawing.Size(583, 272);
             this.listView1.TabIndex = 22;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -270,11 +280,35 @@
             // 
             this.Tienxangxe.Text = "Tiền xăng xe";
             // 
+            // tongchiphi
+            // 
+            this.tongchiphi.Text = "Tổng chi phí";
+            // 
+            // diachi
+            // 
+            this.diachi.Text = "Địa chỉ";
+            // 
+            // quangduong
+            // 
+            this.quangduong.Text = "Quãng đường";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.DarkRed;
+            this.label11.Location = new System.Drawing.Point(41, 15);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(340, 25);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Thống kê kinh phí chạy máy nổ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(910, 437);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.tb_tienxang);
             this.Controls.Add(this.tienmayno);
@@ -306,10 +340,14 @@
 
         #endregion
 
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ColumnHeader diachi;
+        private System.Windows.Forms.ColumnHeader tongchiphi;
+        private System.Windows.Forms.ColumnHeader Tienxangxe;
         private System.Windows.Forms.ColumnHeader Tiendau;
         private System.Windows.Forms.ColumnHeader Tram;
-        private System.Windows.Forms.ColumnHeader Tienxangxe;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader quangduong;
         private System.Windows.Forms.TextBox tb_tienxang;
         private System.Windows.Forms.TextBox tienmayno;
         private System.Windows.Forms.Label label10;
@@ -331,6 +369,7 @@
         private System.Windows.Forms.TextBox giaxang;
         private System.Windows.Forms.TextBox heso;
         private System.Windows.Forms.TextBox giadau;
+
 
     }
 }

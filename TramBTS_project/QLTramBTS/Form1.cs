@@ -59,14 +59,14 @@ namespace QLTramBTS
                 item.Value = i;
                 comboBox2.Items.Add(item);
             }
-             for (int i = 1; i <= 4; i++)
-              {
-                  ComboboxItem item = new ComboboxItem();
-                  item.Text = "Qui " + i;
-                  item.Value = i;
-                  comboBox3.Items.Add(item);
-              }
-            
+            for (int i = 1; i <= 4; i++)
+            {
+                ComboboxItem item = new ComboboxItem();
+                item.Text = "Qui " + i;
+                item.Value = i;
+                comboBox3.Items.Add(item);
+            }
+
             for (int i = 2005; i <= 2015; i++)
             {
                 ComboboxItem item = new ComboboxItem();
@@ -102,7 +102,6 @@ namespace QLTramBTS
             {
                 return false;
             }
-            int num;
             float f;
             if (float.TryParse(gia_dau, out f) && float.TryParse(he_so, out f) && float.TryParse(gia_xang, out f))
             {
@@ -112,17 +111,21 @@ namespace QLTramBTS
         }
         class ItemTram
         {
-            public ItemTram(string name, string tiendau, string tienxangxe)
+            public ItemTram(string name, string tiendau, string tienxangxe, string diachi, float quangduong)
             {
                 this.Name = name;
                 this.TienDau = tiendau;
                 this.TienXangXe = tienxangxe;
+                this.DiaChi = diachi;
+                this.QuangDuong = quangduong;
             }
             public string Name { set; get; }
             public string TienDau { set; get; }
             public string TienXangXe { set; get; }
+            public string DiaChi { set; get; }
+            public float QuangDuong { set; get; }
         }
-        private void addOrUpdateItem(string name, string tiendau, string tienxang)
+        private void addOrUpdateItem(string name, string tiendau, string tienxang, string diachi, float quangduong)
         {
             bool isExit = false;
             for (int i = 0; i < items.Count; i++)
@@ -138,7 +141,7 @@ namespace QLTramBTS
             }
             if (!isExit)
             {
-                items.Add(new ItemTram(name, tiendau, tienxang));
+                items.Add(new ItemTram(name, tiendau, tienxang, diachi, quangduong));
             }
         }
         private List<ItemTram> items = new List<ItemTram>();
@@ -159,7 +162,7 @@ namespace QLTramBTS
                 var tram = ss.FirstOrDefault<Tram>();
                 string giax = int.Parse(giaxang.Text) * tram.QuangDuong + "";
                 string giad = int.Parse(giadau.Text) * (item.SoGioChayMayNo * int.Parse(heso.Text)) + "";
-                this.addOrUpdateItem(tram.TenTram, giad, giax);
+                this.addOrUpdateItem(tram.TenTram, giad, giax, tram.DiaChi, tram.QuangDuong);
                 totalKm += tram.QuangDuong;
             }
             tb_tienxang.Text = int.Parse(giaxang.Text) * totalKm + "";
@@ -170,10 +173,13 @@ namespace QLTramBTS
             {
                 ListViewItem itm;
                 //add items to ListView
-                string[] arr = new string[3];
+                string[] arr = new string[6];
                 arr[0] = item.Name;
                 arr[1] = item.TienDau;
                 arr[2] = item.TienXangXe;
+                arr[3] = (int.Parse(item.TienDau) + int.Parse(item.TienXangXe)) + "";
+                arr[4] = item.DiaChi;
+                arr[5] = item.QuangDuong + "";
                 itm = new ListViewItem(arr);
                 listView1.Items.Add(itm);
             }
@@ -187,100 +193,100 @@ namespace QLTramBTS
                 MessageBox.Show("Nhập dữ liệu không đúng");
                 return;
             }
-            if (comboBox1.SelectedIndex > -1)
+
+            TramContext tramContext = new TramContext();
+            string day = ((ComboboxItem)comboBox1.SelectedItem == null) ? "All" : ((ComboboxItem)comboBox1.SelectedItem).Value.ToString();
+            string month = ((ComboboxItem)comboBox2.SelectedItem == null) ? "All" : ((ComboboxItem)comboBox2.SelectedItem).Value.ToString();
+            //string year = comboBox4.Items[comboBox4.SelectedIndex].ToString();
+            string year = ((ComboboxItem)comboBox4.SelectedItem).Value.ToString();
+            string quarter = ((ComboboxItem)comboBox3.SelectedItem == null) ? "All" : ((ComboboxItem)comboBox3.SelectedItem).Value.ToString();
+            string tram = ((ComboboxItem)comboBox5.SelectedItem == null) ? "All" : ((ComboboxItem)comboBox5.SelectedItem).Value.ToString();
+
+            int year_num = int.Parse(year);
+
+
+            if (day == "All" && month == "All" && quarter != "All" && tram == "All")
             {
-                TramContext tramContext = new TramContext();
-                string day = ((ComboboxItem)comboBox1.SelectedItem).Value.ToString();
-                string month = ((ComboboxItem)comboBox2.SelectedItem).Value.ToString();
-                //string year = comboBox4.Items[comboBox4.SelectedIndex].ToString();
-                string year = ((ComboboxItem)comboBox4.SelectedItem).Value.ToString();
-                string quarter = ((ComboboxItem)comboBox3.SelectedItem).Value.ToString();
-                string tram = ((ComboboxItem)comboBox5.SelectedItem).Value.ToString();
                 int quar_num = int.Parse(quarter);
-                int year_num = int.Parse(year);
-               
-
-                if (day == "All" && month == "All" && quarter != "All" && tram == "All")
-                {
-                    DateTime startTime = getStartDistanceTimeByQuarter(quar_num, year_num);
-                    DateTime endTime = getLastDistanceTimeByQuarter(quar_num, year_num);
-                    var L2EQuery = from st in tramContext.ChayMayNo
-                                   where st.NgayGioChayMayNo >= startTime && st.NgayGioChayMayNo <= endTime
-                                   select st;
-                    tinhGiaDauChayMayNo(L2EQuery);
-                }
-                else if (day == "All" && month == "All" && quarter != "All" && tram != "All")
-                {
-
-                    DateTime startTime = getStartDistanceTimeByQuarter(quar_num, year_num);
-                    DateTime endTime = getLastDistanceTimeByQuarter(quar_num, year_num);
-                    var L2EQuery = from st in tramContext.ChayMayNo
-                                   where st.NgayGioChayMayNo >= startTime && st.NgayGioChayMayNo <= endTime && st.TramId == tram
-                                   select st;
-                    tinhGiaDauChayMayNo(L2EQuery);
-                }
-                else if (day == "All" && month == "All" && tram == "All")
-                {
-                    string date = "1/1/" + year;
-                    DateTime dt_zero = Convert.ToDateTime(date);
-                    DateTime dtAddOneYear = dt_zero.AddYears(1);
-                    var L2EQuery = from st in tramContext.ChayMayNo
-                                   where st.NgayGioChayMayNo >= dt_zero && st.NgayGioChayMayNo <= dtAddOneYear
-                                   select st;
-                    tinhGiaDauChayMayNo(L2EQuery);
-                }
-                else if (day == "All" && month == "All" && tram != "All")
-                {
-
-                    string date = "1/1/" + year;
-                    DateTime dt_zero = Convert.ToDateTime(date);
-                    DateTime dtAddOneYear = dt_zero.AddYears(1);
-                    var L2EQuery = from st in tramContext.ChayMayNo
-                                   where st.NgayGioChayMayNo >= dt_zero && st.NgayGioChayMayNo <= dtAddOneYear && st.TramId == tram
-                                   select st;
-                    tinhGiaDauChayMayNo(L2EQuery);
-                }
-                else if (day == "All" && tram == "All")
-                {
-                    string date = month + "/1" + "/" + year;
-                    DateTime dt_zero = Convert.ToDateTime(date);
-                    DateTime dtAddOneMonth = dt_zero.AddMonths(1);
-                    var L2EQuery = from st in tramContext.ChayMayNo
-                                   where st.NgayGioChayMayNo >= dt_zero && st.NgayGioChayMayNo <= dtAddOneMonth
-                                   select st;
-
-                    tinhGiaDauChayMayNo(L2EQuery);
-                }
-                else if (day == "All" && tram != "All")
-                {
-                    string date = month + "/1" + "/" + year;
-                    DateTime dt_zero = Convert.ToDateTime(date);
-                    DateTime dtAddOneMonth = dt_zero.AddMonths(1);
-                    var L2EQuery = from st in tramContext.ChayMayNo
-                                   where st.NgayGioChayMayNo >= dt_zero && st.NgayGioChayMayNo <= dtAddOneMonth && st.TramId == tram
-                                   select st;
-
-                    tinhGiaDauChayMayNo(L2EQuery);
-                }
-                else if (tram == "All")
-                {
-                    string date = month + "/" + day + "/" + year;
-                    DateTime dt = Convert.ToDateTime(date);
-                    var L2EQuery = from st in tramContext.ChayMayNo
-                                   where st.NgayGioChayMayNo == dt
-                                   select st;
-                }
-                else if (tram != "All")
-                {
-                    string date = month + "/" + day + "/" + year;
-                    DateTime dt = Convert.ToDateTime(date);
-                    var L2EQuery = from st in tramContext.ChayMayNo
-                                   where st.NgayGioChayMayNo == dt && st.TramId == tram
-                                   select st;
-                }
-
-
+                DateTime startTime = getStartDistanceTimeByQuarter(quar_num, year_num);
+                DateTime endTime = getLastDistanceTimeByQuarter(quar_num, year_num);
+                var L2EQuery = from st in tramContext.ChayMayNo
+                               where st.NgayGioChayMayNo >= startTime && st.NgayGioChayMayNo <= endTime
+                               select st;
+                tinhGiaDauChayMayNo(L2EQuery);
             }
+            else if (day == "All" && month == "All" && quarter != "All" && tram != "All")
+            {
+                int quar_num = int.Parse(quarter);
+                DateTime startTime = getStartDistanceTimeByQuarter(quar_num, year_num);
+                DateTime endTime = getLastDistanceTimeByQuarter(quar_num, year_num);
+                var L2EQuery = from st in tramContext.ChayMayNo
+                               where st.NgayGioChayMayNo >= startTime && st.NgayGioChayMayNo <= endTime && st.TramId == tram
+                               select st;
+                tinhGiaDauChayMayNo(L2EQuery);
+            }
+            else if (day == "All" && month == "All" && tram == "All")
+            {
+                string date = "1/1/" + year;
+                DateTime dt_zero = Convert.ToDateTime(date);
+                DateTime dtAddOneYear = dt_zero.AddYears(1);
+                var L2EQuery = from st in tramContext.ChayMayNo
+                               where st.NgayGioChayMayNo >= dt_zero && st.NgayGioChayMayNo <= dtAddOneYear
+                               select st;
+                tinhGiaDauChayMayNo(L2EQuery);
+            }
+            else if (day == "All" && month == "All" && tram != "All")
+            {
+
+                string date = "1/1/" + year;
+                DateTime dt_zero = Convert.ToDateTime(date);
+                DateTime dtAddOneYear = dt_zero.AddYears(1);
+                var L2EQuery = from st in tramContext.ChayMayNo
+                               where st.NgayGioChayMayNo >= dt_zero && st.NgayGioChayMayNo <= dtAddOneYear && st.TramId == tram
+                               select st;
+                tinhGiaDauChayMayNo(L2EQuery);
+            }
+            else if (day == "All" && tram == "All")
+            {
+                string date = month + "/1" + "/" + year;
+                DateTime dt_zero = Convert.ToDateTime(date);
+                DateTime dtAddOneMonth = dt_zero.AddMonths(1);
+                var L2EQuery = from st in tramContext.ChayMayNo
+                               where st.NgayGioChayMayNo >= dt_zero && st.NgayGioChayMayNo <= dtAddOneMonth
+                               select st;
+
+                tinhGiaDauChayMayNo(L2EQuery);
+            }
+            else if (day == "All" && tram != "All")
+            {
+                string date = month + "/1" + "/" + year;
+                DateTime dt_zero = Convert.ToDateTime(date);
+                DateTime dtAddOneMonth = dt_zero.AddMonths(1);
+                var L2EQuery = from st in tramContext.ChayMayNo
+                               where st.NgayGioChayMayNo >= dt_zero && st.NgayGioChayMayNo <= dtAddOneMonth && st.TramId == tram
+                               select st;
+
+                tinhGiaDauChayMayNo(L2EQuery);
+            }
+            else if (tram == "All")
+            {
+                string date = month + "/" + day + "/" + year;
+                DateTime dt = Convert.ToDateTime(date);
+                var L2EQuery = from st in tramContext.ChayMayNo
+                               where st.NgayGioChayMayNo == dt
+                               select st;
+            }
+            else if (tram != "All")
+            {
+                string date = month + "/" + day + "/" + year;
+                DateTime dt = Convert.ToDateTime(date);
+                var L2EQuery = from st in tramContext.ChayMayNo
+                               where st.NgayGioChayMayNo == dt && st.TramId == tram
+                               select st;
+            }
+
+
+
         }
         private DateTime getStartDistanceTimeByQuarter(int quarter, int year)
         {
@@ -319,6 +325,10 @@ namespace QLTramBTS
             if (isFull)
             {
                 comboBox3.Items.Clear();
+                ComboboxItem item_all = new ComboboxItem();
+                item_all.Text = "All";
+                item_all.Value = "All";
+                comboBox3.Items.Add(item_all);
                 for (int i = 1; i <= 4; i++)
                 {
                     ComboboxItem item = new ComboboxItem();
