@@ -45,6 +45,7 @@ namespace QLTramBTS
                 cbSearch.Items.Add(s);
             }
             cbSearch.SelectedItem = cbSearch.Items[0];
+            btnSearch.Enabled = false;
         }
 
         public void Init()
@@ -175,24 +176,26 @@ namespace QLTramBTS
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (txtSearch.Text.Length == 0)
-            {
-                MessageBox.Show("Nhập dữ liệu cần tìm vào textbox!", "Error");
-                return;
-            }
             int index = cbSearch.SelectedIndex;
             int resultCount = 0;
+            ClearListColor();
             foreach (ListViewItem item in listView.Items)
             {
-                item.BackColor = Color.White;
-
-                if (item.SubItems[index].Text.Contains(txtSearch.Text))
+                if (item.SubItems[index].Text.ToLower().Contains(txtSearch.Text))
                 {
                     item.BackColor = Color.Cyan;
                     resultCount++;
                 }
             }
             MessageBox.Show(resultCount + " result(s) was found.", "Search Result");
+        }
+
+        private void ClearListColor()
+        {
+            foreach (ListViewItem item in listView.Items)
+            {
+                item.BackColor = Color.White;
+            }
         }
 
         private void dtpNgayGioChayMayNo_ValueChanged(object sender, EventArgs e)
@@ -302,6 +305,19 @@ namespace QLTramBTS
             btnThem.Enabled = false;
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSearch.Text.Length == 0)
+            {
+                btnSearch.Enabled = false;
+                ClearListColor();
+            }
+            else
+            {
+                btnSearch.Enabled = true;
+            }
         }
     }
 }
