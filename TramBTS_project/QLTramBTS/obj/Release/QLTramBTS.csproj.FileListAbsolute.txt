@@ -1,0 +1,17 @@
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\bin\Release\QLTramBTS.exe.config
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\bin\Release\QLTramBTS.exe
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\bin\Release\QLTramBTS.pdb
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\bin\Release\EntityFramework.dll
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\bin\Release\EntityFramework.SqlServer.dll
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\bin\Release\EntityFramework.xml
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\bin\Release\EntityFramework.SqlServer.xml
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\obj\Release\QLTramBTS.csprojResolveAssemblyReference.cache
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\obj\Release\QLTramBTS.Form1.resources
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\obj\Release\QLTramBTS.ThongkeMayno.resources
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\obj\Release\QLTramBTS.ThongtinBTS.resources
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\obj\Release\QLTramBTS.ThongtinMaynoForm.resources
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\obj\Release\QLTramBTS.Trangchu.resources
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\obj\Release\QLTramBTS.Properties.Resources.resources
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\obj\Release\QLTramBTS.csproj.GenerateResource.Cache
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\obj\Release\QLTramBTS.exe
+E:\Dropbox\Dropbox\Bai_tren_lop\KI_8\ChuyenDe3\baihoanchinh\BTCD3-TramBTS\TramBTS_project\QLTramBTS\obj\Release\QLTramBTS.pdb
