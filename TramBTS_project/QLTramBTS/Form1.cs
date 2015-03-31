@@ -33,7 +33,7 @@ namespace QLTramBTS
 
         public void setupData_reset()
         {
-            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            //listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             ComboboxItem itemall1 = new ComboboxItem();
             itemall1.Text = "All";
             itemall1.Value = "All";
@@ -45,7 +45,7 @@ namespace QLTramBTS
             comboBox3.SelectedIndex = 0;
             comboBox5.Items.Add(itemall1);
             comboBox5.SelectedIndex = 0;
-            for (int i = 1; i <= 30; i++)
+            for (int i = 1; i <= 31; i++)
             {
                 ComboboxItem item = new ComboboxItem();
                 item.Text = "Ngay " + i;
@@ -231,6 +231,20 @@ namespace QLTramBTS
                     return;
                 }
             }
+            if(day != "All" && month != "All")
+            {
+                string day_check = year + "-" + month + "-" + day;
+                DateTime check; 
+                if(DateTime.TryParse(day_check,out check))
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show("Ngày tháng ko hợp lệ");
+                    return;
+                }
+            }
             if (day == "All" && month == "All" && quarter != "All" && tram == "All")
             {
                 int quar_num = int.Parse(quarter);
@@ -299,7 +313,7 @@ namespace QLTramBTS
                 string date = month + "/" + day + "/" + year;
                 DateTime dt = Convert.ToDateTime(date);
                 var L2EQuery = from st in tramContext.ChayMayNo
-                               where st.NgayGioChayMayNo == dt
+                               where st.NgayGioChayMayNo.Day == dt.Day && st.NgayGioChayMayNo.Month == dt.Month && st.NgayGioChayMayNo.Year == dt.Year
                                select st;
                 tinhGiaDauChayMayNo(L2EQuery);
             }
@@ -308,7 +322,7 @@ namespace QLTramBTS
                 string date = month + "/" + day + "/" + year;
                 DateTime dt = Convert.ToDateTime(date);
                 var L2EQuery = from st in tramContext.ChayMayNo
-                               where st.NgayGioChayMayNo == dt && st.TramId == tram
+                               where st.NgayGioChayMayNo.Day == dt.Day && st.NgayGioChayMayNo.Month == dt.Month && st.NgayGioChayMayNo.Year == dt.Year && st.TramId == tram
                                select st;
                 tinhGiaDauChayMayNo(L2EQuery);
             }

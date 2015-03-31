@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,23 +26,14 @@ namespace QLTramBTS
             tramContext = new TramContext();
             MaynoRepo = new GenericRepository<ChayMayNo>(tramContext);
             TramRepo = new GenericRepository<Tram>(tramContext);
-            UpdateItem();
-            
-        }
-        //Cap nhat item cho combobox
-        void UpdateItem()
-        {
-            
-            cmbTram.Items.Clear();
-
             //Them item cho combobox ngay
-            
+
             for (int i = 1; i <= 31; i++)
             {
                 cmbNgay.Items.Add(i);
             }
             //Them item cho combobox thang
-            
+
             for (int i = 1; i <= 12; i++)
             {
                 cmbThang.Items.Add(i);
@@ -53,9 +43,17 @@ namespace QLTramBTS
             {
                 cmbNam.Items.Add(i);
             }
+            UpdateItem();
+
+        }
+        //Cap nhat item cho combobox
+        void UpdateItem()
+        {
+
+            cmbTram.Items.Clear();
 
             //Them item cho combo box Tram
-            
+
             var listram = TramRepo.Get();
             foreach (var tram in listram)
             {
@@ -73,7 +71,7 @@ namespace QLTramBTS
             string Tenhang = null;
             foreach (var mayno in listmayno)
             {
-                foreach(var tram in listtram)
+                foreach (var tram in listtram)
                 {
                     if (mayno.TramId == tram.TramId)
                     {
@@ -83,14 +81,14 @@ namespace QLTramBTS
                     }
                 }
                 i++;
-                ListViewItem item = new ListViewItem(""+i);                
+                ListViewItem item = new ListViewItem("" + i);
                 item.SubItems.Add(mayno.TramId.ToString());
                 item.SubItems.Add(Tentram);
                 item.SubItems.Add(Tenhang);
                 item.SubItems.Add(mayno.NgayGioChayMayNo.ToString());
                 item.SubItems.Add(mayno.SoGioChayMayNo.ToString());
                 item.SubItems.Add(mayno.SoLanViPham.ToString());
-              
+
                 listView1.Items.Add(item);
             }
         }
@@ -100,9 +98,9 @@ namespace QLTramBTS
             listView1.Items.Clear();
             int i = 0;
             var listmayno = from st in tramContext.ChayMayNo
-                            where st.NgayGioChayMayNo.Month.ToString() == date.Month.ToString() && st.NgayGioChayMayNo.Year.ToString() == date.Year.ToString()&&st.NgayGioChayMayNo.Day.ToString()==date.Day.ToString()
+                            where st.NgayGioChayMayNo.Month.ToString() == date.Month.ToString() && st.NgayGioChayMayNo.Year.ToString() == date.Year.ToString() && st.NgayGioChayMayNo.Day.ToString() == date.Day.ToString()
                             select st;
-            
+
             var listtram = TramRepo.Get();
             string Tentram = null;
             string Tenhang = null;
@@ -135,7 +133,7 @@ namespace QLTramBTS
             listView1.Items.Clear();
             int i = 0;
             var listmayno = from st in tramContext.ChayMayNo
-                            where st.NgayGioChayMayNo.Month.ToString()==Thang&&st.NgayGioChayMayNo.Year.ToString()==Nam
+                            where st.NgayGioChayMayNo.Month.ToString() == Thang && st.NgayGioChayMayNo.Year.ToString() == Nam
                             select st;
             var listtram = TramRepo.Get();
             string Tentram = null;
@@ -198,67 +196,67 @@ namespace QLTramBTS
             }
         }
         //Cap nhat danh sach thong ke theo quy
-        void UpdatelistQuy(string Nam,string Quy)
+        void UpdatelistQuy(string Nam, string Quy)
         {
             listView1.Items.Clear();
             int i = 0;
-            var listmayno=MaynoRepo.Get();
+            var listmayno = MaynoRepo.Get();
             if (Nam.Equals("Tất cả"))
             {
                 if (Quy.Equals("1"))
                 {
-                     listmayno = from st in tramContext.ChayMayNo
-                                    where st.NgayGioChayMayNo.Month >= 1 && st.NgayGioChayMayNo.Month <= 3
-                                    select st;
+                    listmayno = from st in tramContext.ChayMayNo
+                                where st.NgayGioChayMayNo.Month >= 1 && st.NgayGioChayMayNo.Month <= 3
+                                select st;
                 }
                 else
                     if (Quy.Equals("2"))
                     {
-                         listmayno = from st in tramContext.ChayMayNo
-                                        where st.NgayGioChayMayNo.Month >= 4 && st.NgayGioChayMayNo.Month <= 6
-                                        select st;
+                        listmayno = from st in tramContext.ChayMayNo
+                                    where st.NgayGioChayMayNo.Month >= 4 && st.NgayGioChayMayNo.Month <= 6
+                                    select st;
                     }
                     else
                         if (Quy.Equals("3"))
                         {
-                             listmayno = from st in tramContext.ChayMayNo
-                                            where st.NgayGioChayMayNo.Month >= 7 && st.NgayGioChayMayNo.Month <= 9
-                                            select st;
+                            listmayno = from st in tramContext.ChayMayNo
+                                        where st.NgayGioChayMayNo.Month >= 7 && st.NgayGioChayMayNo.Month <= 9
+                                        select st;
                         }
                         else
                         {
-                             listmayno = from st in tramContext.ChayMayNo
-                                            where st.NgayGioChayMayNo.Month >= 10 && st.NgayGioChayMayNo.Month <= 12
-                                            select st;
+                            listmayno = from st in tramContext.ChayMayNo
+                                        where st.NgayGioChayMayNo.Month >= 10 && st.NgayGioChayMayNo.Month <= 12
+                                        select st;
                         }
             }
             else
             {
                 if (Quy.Equals("1"))
                 {
-                     listmayno = from st in tramContext.ChayMayNo
-                                    where st.NgayGioChayMayNo.Month >= 1 && st.NgayGioChayMayNo.Month <= 3 && st.NgayGioChayMayNo.Year.ToString()==Nam
-                                    select st;
+                    listmayno = from st in tramContext.ChayMayNo
+                                where st.NgayGioChayMayNo.Month >= 1 && st.NgayGioChayMayNo.Month <= 3 && st.NgayGioChayMayNo.Year.ToString() == Nam
+                                select st;
                 }
                 else
                     if (Quy.Equals("2"))
                     {
-                         listmayno = from st in tramContext.ChayMayNo
-                                        where st.NgayGioChayMayNo.Month >= 4 && st.NgayGioChayMayNo.Month <= 6 && st.NgayGioChayMayNo.Year.ToString() == Nam
-                                        select st;
+                        listmayno = from st in tramContext.ChayMayNo
+                                    where st.NgayGioChayMayNo.Month >= 4 && st.NgayGioChayMayNo.Month <= 6 && st.NgayGioChayMayNo.Year.ToString() == Nam
+                                    select st;
                     }
                     else
                         if (Quy.Equals("3"))
                         {
-                             listmayno = from st in tramContext.ChayMayNo
-                                            where st.NgayGioChayMayNo.Month >= 7 && st.NgayGioChayMayNo.Month <= 9 && st.NgayGioChayMayNo.Year.ToString() == Nam
-                                            select st;
+                            listmayno = from st in tramContext.ChayMayNo
+                                        where st.NgayGioChayMayNo.Month >= 7 && st.NgayGioChayMayNo.Month <= 9 && st.NgayGioChayMayNo.Year.ToString() == Nam
+                                        select st;
                         }
                         else
                         {
-                             listmayno = from st in tramContext.ChayMayNo
-                                            where st.NgayGioChayMayNo.Month >= 10 && st.NgayGioChayMayNo.Month <= 12 && st.NgayGioChayMayNo.Year.ToString() == Nam
-                                            select st;
+                            listmayno = from st in tramContext.ChayMayNo
+                                        where st.NgayGioChayMayNo.Month >= 10 && st.NgayGioChayMayNo.Month <= 12 && st.NgayGioChayMayNo.Year.ToString() == Nam
+                                        select st;
                         }
             }
             var listtram = TramRepo.Get();
@@ -286,8 +284,8 @@ namespace QLTramBTS
 
                 listView1.Items.Add(item);
             }
-        }     
-        
+        }
+
         //Cap nhat danh sach thong ke theo hang
 
         void UpdatelistHang(string Hang)
@@ -295,10 +293,10 @@ namespace QLTramBTS
             listView1.Items.Clear();
             int i = 0;
             var listmayno = from s in tramContext.ChayMayNo
-                        join sa in tramContext.Tram on s.TramId equals sa.TramId
-                        where sa.Hang == Hang
-                        select s;
-            
+                            join sa in tramContext.Tram on s.TramId equals sa.TramId
+                            where sa.Hang == Hang
+                            select s;
+
             var listtram = TramRepo.Get();
             string Tentram = null;
             string Tenhang = null;
@@ -399,57 +397,57 @@ namespace QLTramBTS
         //Thong ke theo yeu cau
         private void btnThongke_Click(object sender, EventArgs e)
         {
-           
-            
-                if (!cmbNgay.Text.Equals("") && !cmbThang.Text.Equals("") && !cmbNam.Text.Equals("") && rdbNgay.Checked)
-                {
-                    string ngay = cmbNgay.Text + "/" + cmbThang.Text + "/" + cmbNam.Text;
-                    DateTime date; //=DateTime.Today;
-                    try
-                    {
 
-                        //date = Convert.ToDateTime(ngay, "dd/MM/yyyy");
-                        date = new DateTime(Int32.Parse(cmbNam.Text), Int32.Parse(cmbThang.Text), Int32.Parse(cmbNgay.Text));
-                        UpdatelistNgay(date);
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show("Lỗi định dạng ngày","ERROR");
-                    }
-                    
+
+            if (!cmbNgay.Text.Equals("") && !cmbThang.Text.Equals("") && !cmbNam.Text.Equals("") && rdbNgay.Checked)
+            {
+                string ngay = cmbNgay.Text + "/" + cmbThang.Text + "/" + cmbNam.Text;
+                DateTime date; //=DateTime.Today;
+                try
+                {
+
+                    //date = Convert.ToDateTime(ngay, "dd/MM/yyyy");
+                    date = new DateTime(Int32.Parse(cmbNam.Text), Int32.Parse(cmbThang.Text), Int32.Parse(cmbNgay.Text));
+                    UpdatelistNgay(date);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi định dạng ngày", "ERROR");
+                }
+
+            }
+            else
+                if (!cmbThang.Text.Equals("") && !cmbNam.Text.Equals("") && rdbThang.Checked)
+                {
+                    UpdatelistThang(cmbThang.Text, cmbNam.Text);
                 }
                 else
-                    if (!cmbThang.Text.Equals("") && !cmbNam.Text.Equals("")&&rdbThang.Checked)
+                    if (!cmbNam.Text.Equals("") && rdbNam.Checked)
                     {
-                        UpdatelistThang(cmbThang.Text, cmbNam.Text);
+                        UpdatelistNam(cmbNam.Text);
                     }
+
                     else
-                        if (!cmbNam.Text.Equals("")&&rdbNam.Checked)
+                        if (!cmbQuy.Text.Equals("") && !cmbNam.Text.Equals("") && rdbQuy.Checked)
                         {
-                            UpdatelistNam(cmbNam.Text);
-                        }                        
-            
-            else
-                if(!cmbQuy.Text.Equals("")&&!cmbNam.Text.Equals("")&&rdbQuy.Checked)
-                {
-                   
-                    UpdatelistQuy(cmbNam.Text,cmbQuy.Text);
-                }
-            else
-                    if(!cmbHang.Text.Equals("")&&rdbHang.Checked)
-                    {
-                        UpdatelistHang(cmbHang.Text);
-                    }
-                    else
-                        if (!cmbTram.Text.Equals("") && rdbTram.Checked)
-                        {
-                            UpdatelistTram(cmbTram.Text);
+
+                            UpdatelistQuy(cmbNam.Text, cmbQuy.Text);
                         }
                         else
-                            if (!txtSolanvipham.Text.Equals("")&&rdbVipham.Checked)
+                            if (!cmbHang.Text.Equals("") && rdbHang.Checked)
                             {
-                                UpdatelistVipham(txtSolanvipham.Text);
+                                UpdatelistHang(cmbHang.Text);
                             }
+                            else
+                                if (!cmbTram.Text.Equals("") && rdbTram.Checked)
+                                {
+                                    UpdatelistTram(cmbTram.Text);
+                                }
+                                else
+                                    if (!txtSolanvipham.Text.Equals("") && rdbVipham.Checked)
+                                    {
+                                        UpdatelistVipham(txtSolanvipham.Text);
+                                    }
 
         }
         //Cap nhat item
@@ -460,7 +458,7 @@ namespace QLTramBTS
         //Thong ke tat ca
         private void btnThongkeAll_Click(object sender, EventArgs e)
         {
-            UpdateList();            
+            UpdateList();
         }
         //Ham to mau
         void Tomau(int iditem)
@@ -491,14 +489,15 @@ namespace QLTramBTS
                     {
                         Tomau(1);
                     }
-                else
+                    else
                         if (cmbTim.Text.Equals("Hãng"))
                         {
                             Tomau(3);
                         }
-                else
+                        else
                             if (cmbTim.Text.Equals("Ngày"))
                             {
+                                
                                 for (int i = 0; i < listView1.Items.Count; i++)
                                     if (listView1.Items[i].SubItems[4].Text.Contains(txtTim.Text))
                                     {
@@ -511,18 +510,18 @@ namespace QLTramBTS
                                         listView1.Items[i].BackColor = Color.White;
                                     }
                             }
-                else
+                            else
                                 if (cmbTim.Text.Equals("Số lần vi phạm"))
                                 {
                                     Tomau(6);
                                 }
-                
+
             }
         }
 
         private void txtTim_TextChanged(object sender, EventArgs e)
         {
-            if (txtTim.Text.Equals("")||cmbTim.Text.Equals(""))
+            if (txtTim.Text.Equals("") || cmbTim.Text.Equals(""))
             {
                 for (int i = 0; i < listView1.Items.Count; i++)
                 {
@@ -554,9 +553,9 @@ namespace QLTramBTS
 
         private void cmbHang_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(!cmbHang.Text.Equals("")&&rdbHang.Checked)
+            if (!cmbHang.Text.Equals("") && rdbHang.Checked)
             {
-                btnThongke.Enabled=true;
+                btnThongke.Enabled = true;
             }
             else
             {
@@ -566,7 +565,7 @@ namespace QLTramBTS
 
         private void cmbTram_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!cmbTram.Text.Equals("")&&rdbTram.Checked)
+            if (!cmbTram.Text.Equals("") && rdbTram.Checked)
             {
                 btnThongke.Enabled = true;
             }
@@ -578,7 +577,7 @@ namespace QLTramBTS
 
         private void cmbNgay_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!cmbNgay.Text.Equals("") && !cmbThang.Text.Equals("") && !cmbNam.Text.Equals("")&&rdbNgay.Checked)
+            if (!cmbNgay.Text.Equals("") && !cmbThang.Text.Equals("") && !cmbNam.Text.Equals("") && rdbNgay.Checked)
             {
                 btnThongke.Enabled = true;
             }
@@ -586,7 +585,7 @@ namespace QLTramBTS
             {
                 btnThongke.Enabled = false;
             }
-            
+
         }
 
         private void rdbNgay_CheckedChanged(object sender, EventArgs e)
@@ -599,7 +598,7 @@ namespace QLTramBTS
             {
                 btnThongke.Enabled = false;
             }
-            if(rdbNgay.Checked)
+            if (rdbNgay.Checked)
             {
                 cmbNgay.Enabled = cmbThang.Enabled = cmbNam.Enabled = true;
                 cmbQuy.Enabled = cmbHang.Enabled = cmbTram.Enabled = txtSolanvipham.Enabled = false;
@@ -627,8 +626,8 @@ namespace QLTramBTS
         {
             if (rdbNam.Checked)
             {
-                 cmbNam.Enabled = true;
-                 cmbNgay.Enabled = cmbThang.Enabled = cmbQuy.Enabled = cmbHang.Enabled = cmbTram.Enabled = txtSolanvipham.Enabled = false;
+                cmbNam.Enabled = true;
+                cmbNgay.Enabled = cmbThang.Enabled = cmbQuy.Enabled = cmbHang.Enabled = cmbTram.Enabled = txtSolanvipham.Enabled = false;
             }
             if (!cmbNam.Text.Equals("") && rdbNam.Checked)
             {
@@ -719,25 +718,25 @@ namespace QLTramBTS
             }
         }
 
-       
+
         private void cmbThang_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!cmbThang.Text.Equals("") && !cmbNam.Text.Equals("") && rdbThang.Checked)
             {
                 btnThongke.Enabled = true;
-                
+
             }
             else
             {
                 if (!cmbNgay.Text.Equals("") && !cmbThang.Text.Equals("") && !cmbNam.Text.Equals("") && rdbNgay.Checked)
                 {
                     btnThongke.Enabled = true;
-                    
+
                 }
                 else
                 {
                     btnThongke.Enabled = false;
-                    
+
                 }
             }
         }
@@ -747,33 +746,33 @@ namespace QLTramBTS
             if (!cmbNam.Text.Equals("") && rdbNam.Checked)
             {
                 btnThongke.Enabled = true;
-                
+
             }
             else
             {
                 if (!cmbNgay.Text.Equals("") && !cmbThang.Text.Equals("") && !cmbNam.Text.Equals("") && rdbNgay.Checked)
                 {
                     btnThongke.Enabled = true;
-                    
+
                 }
                 else
 
                     if (!cmbThang.Text.Equals("") && !cmbNam.Text.Equals("") && rdbThang.Checked)
                     {
                         btnThongke.Enabled = true;
-                        
+
                     }
                     else
 
                         if (!cmbQuy.Text.Equals("") && !cmbNam.Text.Equals("") && rdbQuy.Checked)
                         {
                             btnThongke.Enabled = true;
-                            
+
                         }
                         else
                         {
                             btnThongke.Enabled = false;
-                            
+
                         }
             }
 
@@ -781,7 +780,7 @@ namespace QLTramBTS
 
         private void cmbQuy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!cmbNam.Text.Equals("") &&!cmbQuy.Text.Equals("")&& rdbQuy.Checked)
+            if (!cmbNam.Text.Equals("") && !cmbQuy.Text.Equals("") && rdbQuy.Checked)
             {
                 btnThongke.Enabled = true;
             }
@@ -791,11 +790,11 @@ namespace QLTramBTS
             }
         }
 
-        
 
-        
 
-        
- 
+
+
+
+
     }
 }

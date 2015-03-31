@@ -272,7 +272,7 @@ namespace QLTramBTS
 
         private void txtGiaThue_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(txtGiaThue.Text, @"[^0-9]+$"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(txtGiaThue.Text, @"[^0-9]"))
             {
                 MessageBox.Show("Please enter only numbers.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtGiaThue.Text = txtGiaThue.Text.Remove(txtGiaThue.Text.Length - 1);
@@ -306,7 +306,7 @@ namespace QLTramBTS
         private void txtMa_TextChanged(object sender, EventArgs e)
         {
             txtMa.MaxLength = 50;
-            if (System.Text.RegularExpressions.Regex.IsMatch(txtMa.Text, @"[^a-zA-Z0-9]+$"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(txtMa.Text, @"[^a-zA-Z0-9]"))
             {
                 MessageBox.Show("Mã không được chứa kí tự đặc biệt!", "Error");
                 txtMa.Text = txtMa.Text.Remove(txtMa.Text.Length - 1);
