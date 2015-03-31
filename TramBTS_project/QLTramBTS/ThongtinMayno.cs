@@ -145,7 +145,7 @@ namespace QLTramBTS
             dtpNgayGioChayMayNo.ResetText();
             txtSoGioChay.Text = "";
             txtSoLanViPham.Text = "0";
-            cbTramId.Text = "";
+            cbTramId.SelectedIndex = -1;
             btnThem.Enabled = true;
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
@@ -254,7 +254,7 @@ namespace QLTramBTS
             //    MessageBox.Show("Mã không được để trống!", "Error");
             //    ok = false;
             //}
-            if (System.Text.RegularExpressions.Regex.IsMatch(txtMa.Text, @"[^a-zA-Z0-9]+$"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(txtMa.Text, @"[^a-zA-Z0-9]"))
             {
                 MessageBox.Show("Mã không được chứa kí tự đặc biệt!", "Error");
                 ok = false;

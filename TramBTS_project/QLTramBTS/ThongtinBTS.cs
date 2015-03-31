@@ -52,8 +52,26 @@ namespace QLTramBTS
                 string hang = this.cmbHang.Text;
                 string vp = "0";
                 int nam = Int32.Parse(cmbNam.Text);
-                float qd = Single.Parse(txtQuangDuong.Text);
-                int gia = Int32.Parse(txtGiaThue.Text);
+                float qd;
+                try
+                {
+                    qd = Single.Parse(txtQuangDuong.Text);
+                }
+                catch (Exception e1)
+                {
+                    MessageBox.Show("Quãng đường không hợp lệ !", "Thông tin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                int gia;
+                try
+                {
+                    gia = Int32.Parse(txtGiaThue.Text);
+                }
+                catch (Exception e1)
+                {
+                    MessageBox.Show("Giá thuê không hợp lệ !","Thông tin",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    return;
+                }
                 Tram tram = new Tram();
                 tram.TramId = ma;
                 tram.TenTram = ten;
@@ -109,8 +127,8 @@ namespace QLTramBTS
             txtMa.Text = "";
             txtQuangDuong.Text = "";
             txtTen.Text = "";
-            cmbHang.Text = "";
-            cmbNam.Text = "";
+            cmbHang.SelectedIndex=-1;
+            cmbNam.SelectedIndex=-1;
             txtDiaChi.Enabled = true;
             txtGiaThue.Enabled = true;
             txtMa.Enabled = true;
@@ -127,8 +145,24 @@ namespace QLTramBTS
             tram.DiaChi = txtDiaChi.Text;
             tram.Hang = cmbHang.Text;
             tram.NamXayDung = Int32.Parse(cmbNam.Text);
-            tram.QuangDuong = Single.Parse(txtQuangDuong.Text);
-            tram.GiaThue = Int32.Parse(txtGiaThue.Text);
+            try
+            {
+                tram.QuangDuong = Single.Parse(txtQuangDuong.Text);
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Quãng đường không hợp lệ !", "Thông tin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            try
+            {
+                tram.GiaThue = Int32.Parse(txtGiaThue.Text);
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Giá thuê không hợp lệ","Thông tin", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                return;
+            }
             try
             {
                 tramRepo.Update(tram);
@@ -208,14 +242,11 @@ namespace QLTramBTS
             if(SelectedList.Count==0)
             {
                 btnReset_Click(null, null);
-                
-
             }
             else
             {
                 btnSua.Enabled = btnXoa.Enabled = true;
                 btnThem.Enabled = false;
-
             }
             
             foreach (ListViewItem item in SelectedList)
