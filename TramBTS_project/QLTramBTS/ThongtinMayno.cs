@@ -209,7 +209,8 @@ namespace QLTramBTS
             {
                 if (gioCup.Hour >= 21 && gioCup.Hour <= 23)
                 {
-                    DateTime moc = new DateTime(gioCup.Year, gioCup.Month, gioCup.Day + 1, 7, 0, 1);
+                    DateTime x = gioCup.AddDays(1);
+                    DateTime moc = new DateTime(x.Year, x.Month, x.Day, 7, 0, 1);
 
                     System.TimeSpan diff2 = gioChay - moc;
 
