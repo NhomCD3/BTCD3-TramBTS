@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -498,17 +499,8 @@ namespace QLTramBTS
                 else
                             if (cmbTim.Text.Equals("Ngày"))
                             {
-                                DateTime date = DateTime.Today; //=DateTime.Today;
-                                try
-                                {
-                                    date = Convert.ToDateTime(txtTim.Text);
-                                }
-                                catch (Exception ex)
-                                {
-                                    MessageBox.Show("Lỗi định dạng ngày", "ERROR");
-                                }
                                 for (int i = 0; i < listView1.Items.Count; i++)
-                                    if (Convert.ToDateTime(listView1.Items[i].SubItems[4].Text).Date == date.Date)
+                                    if (listView1.Items[i].SubItems[4].Text.Contains(txtTim.Text))
                                     {
                                         listView1.Items[i].Selected = true;
                                         listView1.Items[i].BackColor = Color.CornflowerBlue;
