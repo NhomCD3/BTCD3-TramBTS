@@ -12,7 +12,7 @@ namespace QLTramBTS
     {
         //static string path = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName + @"\Database";
         static string path = new DirectoryInfo(Environment.CurrentDirectory).FullName;
-        static string connectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + path + @"\TramBTS_DB.mdf;Integrated Security=True;";
+        static string connectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + path + @"\TramBTS_DB.mdf;Integrated Security=True;Connect Timeout=30";
 
         public TramContext()
             : base(connectionString)
